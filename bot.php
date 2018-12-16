@@ -74,7 +74,7 @@ function jadwalbelajar($keyword){
 }
 
 #function dari api xml
-function jadwalbelajar($keyword){
+function jadwalbelajar1($keyword){
 	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
 	$xml = new SimpleXMLElement($uri);
 	$result = "title \n";
@@ -85,11 +85,11 @@ function jadwalbelajar($keyword){
 }
 
 #function text dari sebuah website
-function acara tv($keyword){
+function acaratv($keyword){
 $uri = "https://yuubase.herokuapp.com/acaratv.php?id=" .$keyword;
 $hasil = file_get_contents($uri);
-$result = str_ireplace(<br />, "\n", $hasil) ;
-return $result;
+/*$result = str_replace(<br />, "\n", $hasil) ;
+return $result;*/
 }
 
 
@@ -98,13 +98,13 @@ function jadwalbola	($keyword){
 	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
 	$response = Unirest\Request::get("$uri"); //responnya
 	$json = json_decode($response->raw_body, true); //format wajib
-	$result = "jadwal chelsea jam" //lokasi path dari api yang ingin diambil
+/*	$result = "jadwal chelsea jam" //lokasi path dari api yang ingin diambil
 	$result .= $json['data']['Fajr'];
-	return $result;
+	return $result;*/
 }
 
 #function dengan return $parsed gunanya untuk pisah pisah berguna untuk carousel
-function jadwalbola	($keyword){
+function jadwalbola1($keyword){
 	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
 	$response = Unirest\Request::get("$uri"); //responnya
 	$json = json_decode($response->raw_body, true); //format wajib
