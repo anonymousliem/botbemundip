@@ -162,6 +162,20 @@ if ($command == '/hariini') {
         );
     }
 
+	if ($command == 'yes') {
+		
+		$result = sederhana($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => str_replace("HELLO","HAI",$result),
+                )
+            )
+        );
+    }
+
 }
 
 
