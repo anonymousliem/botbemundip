@@ -2,32 +2,35 @@
 /*
 copyright @ medantechno.com
 Modified @ Farzain - zFz
-edited @ anonymousliem 
-2018
-
+2017
+ 
 */
-
+ 
 require_once('./line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
-
+ 
 $channelAccessToken = 'KXAUqsQGVu/jeOYDslFyXFx7O+yPEAWuHx4jwAoPxJPQgGKMpVLE4eXKYfqfLip4N0CvPRLmmTb7GnWMpcoZYqlbr0sC2v5baZy3SIl3gLb0Ow2gHROoiWSwPXME21iZVcsh5M/Zx6TPHa9tz4K29gdB04t89/1O/w1cDnyilFU='; 
 $channelSecret = '7ea943d2a33356237c63cad58a0ef1ed'; 
 
+
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
-
-$userId 	= $client->parseEvents()[0]['source']['userId'];
-$groupId 	= $client->parseEvents()[0]['source']['groupId'];
+ 
+$userId     = $client->parseEvents()[0]['source']['userId'];
+$groupId    = $client->parseEvents()[0]['source']['groupId'];
 $replyToken = $client->parseEvents()[0]['replyToken'];
-$timestamp	= $client->parseEvents()[0]['timestamp'];
-$type 		= $client->parseEvents()[0]['type'];
-
-$message 	= $client->parseEvents()[0]['message'];
-$messageid 	= $client->parseEvents()[0]['message']['id'];
-
+$timestamp  = $client->parseEvents()[0]['timestamp'];
+$type       = $client->parseEvents()[0]['type'];
+ 
+$message    = $client->parseEvents()[0]['message'];
+$messageid  = $client->parseEvents()[0]['message']['id'];
 $profil = $client->profil($userId);
-
+$profileName    = $profil->displayName;
+$profileURL     = $profil->pictureUrl;
+$profielStatus  = $profil->statusMessage;
+$profil = $client->profil($userId);
+ 
 $pesan_datang = explode(" ", $message['text']);
-
+ 
 $command = $pesan_datang[0]; # /shalat bandung
 $options = $pesan_datang[1];
 if (count($pesan_datang) > 2) {
@@ -36,13 +39,25 @@ if (count($pesan_datang) > 2) {
         $options .= $pesan_datang[$i];
     }
 }
-
+ 
 #-------------------------[Function]-------------------------# # 
+function tts($keyword) {        
+    $uri = "https://translate.google.com/translate_tts?ie=UTF-8&tl=id-ID&client=tw-ob&q=" . $keyword; 
+    $result = $uri; 
+    return $result; 
+}
+ 
+function tts2($keyword) {        
+    $uri = "https://translate.google.com/translate_tts?ie=UTF-8&tl=en-ID&client=tw-ob&q=" . $keyword; 
+    $result = $uri; 
+    return $result; 
+} 
+ 
 function shalat($keyword) { 
     $uri = "https://time.siswadi.com/pray/" . $keyword; 
-
+ 
     $response = Unirest\Request::get("$uri"); 
-
+ 
     $json = json_decode($response->raw_body, true); 
     $parsed = array(); 
     $parsed['sunrise'] = $json['data']['Sunrise']; 
@@ -54,70 +69,52 @@ function shalat($keyword) {
     return $parsed; 
 } 
 function sederhana($keyword) {
-	$belajar = "HELLO WORLD\n";
-	$belajar .= "<br>";
-	$belajar .= " HELLO";
+    $belajar = "Y";
     return $belajar;
 }
-
-#function text sederhana
-function admin ($keyword){
-	$result = "admin hari ini adalah";
-	return $result;
+function sederhana1($keyword) {
+    $result = "HELLO PETTER";
+    return $result;
 }
 
-#function pake public api json
-function jadwalbelajar($keyword){
-	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
-	$response = Unirest\Request::get("$uri"); //responnya
-	$json = json_decode($response->raw_body, true); //format wajib
-	$result = $json['data']['Dhuhr']; //lokasi path dari api yang ingin diambil
-	return $result;
-}
-
-#function dari api xml
-function jadwalbelajar1($keyword){
-	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
-	$xml = new SimpleXMLElement($uri);
-	$result = "title \n";
-	$result .= $xml->entry[0]->title;
-	$result .= "\n synonymous \n";
-	$result .= $xml->entry[0]->synonymous;
-	return $result;
-}
-
-#function text dari sebuah website
-function acaratv($keyword){
-$uri = "https://yuubase.herokuapp.com/acaratv.php?id=" .$keyword;
-$hasil = file_get_contents($uri);
-/*$result = str_replace(<br />, "\n", $hasil) ;
-return $result;*/
+function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
+    $list_jwb = array(		#ini adalah kumpulan list jawaban random yang akan keluar, bisa kalian ubah sesuka hati kalian
+		'Ya',
+		'Tidak',
+		'Bisa jadi',
+		'Tentu tidak',
+		);
+    $jaws = array_rand($list_jwb);
+    $jawab = $list_jwb[$jaws];
+    return($jawab);
 }
 
 
-#function pake return $result
-function jadwalbola	($keyword){
-	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
-	$response = Unirest\Request::get("$uri"); //responnya
-	$json = json_decode($response->raw_body, true); //format wajib
-/*	$result = "jadwal chelsea jam" //lokasi path dari api yang ingin diambil
-	$result .= $json['data']['Fajr'];
-	return $result;*/
+function lokasi($keyword) { 	#Kalau di bot Yuuko-chan ini adalah Function /lokasi, PUBLIC API ini dapat dari website maps.google.com
+    $uri = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=" . $keyword; 
+    $response = Unirest\Request::get("$uri"); 
+    $json = json_decode($response->raw_body, true); 
+    $parsed = array(); 
+    $parsed['lat'] = $json['results']['0']['geometry']['location']['lat']; 
+    $parsed['long'] = $json['results']['0']['geometry']['location']['lng']; 
+	$parsed['loct1'] = $json['results']['0']['address_components']['0']['long_name'];
+    return $parsed; 
 }
 
-#function dengan return $parsed gunanya untuk pisah pisah berguna untuk carousel
-function jadwalbola1($keyword){
-	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
-	$response = Unirest\Request::get("$uri"); //responnya
-	$json = json_decode($response->raw_body, true); //format wajib
-	$parsed = array();
-	$parsed['a']=$json['data']['Fajr'];
-	$parsed['b']=$json['data']['Dhuhr'];
-	return $parsed;
+function kosan($keyword) { 	#Kalau di bot Yuuko-chan ini adalah Function /lokasi, PUBLIC API ini dapat dari website maps.google.com
+    $uri = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=kos%20sigawe%20ceria%2014"; 
+    $response = Unirest\Request::get("$uri"); 
+    $json = json_decode($response->raw_body, true); 
+    $parsed = array(); 
+    $parsed['lat'] = $json['results']['0']['geometry']['location']['lat']; 
+    $parsed['long'] = $json['results']['0']['geometry']['location']['lng']; 
+	$parsed['loct1'] = $json['results']['0']['address_components']['0']['long_name'];
+    return $parsed; 
 }
-
 #-------------------------[Function]-------------------------#
-/*
+ 
+ 
+ 
 //show menu, saat join dan command /menu
 if ($type == 'join' || $command == 'menu') {
     $text = "HALLO SEMUA";
@@ -131,123 +128,114 @@ if ($type == 'join' || $command == 'menu') {
         )
     );
 }
-
-#command list text tanpa function
-if ($messages['type']=='text'){
-if ($command == '/hariini') {
+ 
+     if ($command == 'apakah' || $command == 'Apakah' || $command == '/apakah') {
+         
+        $result = apakah($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
-               array (
-				  'type' => 'text',
-				  'text' => 'Hello, world',
+                array(
+                    'type' => 'text',
+                    'text' => $result,
+                )
+            )
+        );
+    }
+
+	
+     
+    if ($command == 'say' || $command == 'Say' || $command == '/say' || $command == '/Say') {
+        $result = tts($options);
+        $balas = array(
+                    'replyToken' => $replyToken,
+                    'messages' => array(
+                                    array (
+  'type' => 'audio',
+  'originalContentUrl' => $result,
+  'duration' => 60000,
+)
+            )
+        );
+    }
+	
+    if ($command == 'say en' || $command == '/sayen' || $command == '/say en' || $command == '/Say en' || $command == 'Say en') {
+        $result = tts2($options);
+        $balas = array(
+                    'replyToken' => $replyToken,
+                    'messages' => array(
+                                    array (
+  'type' => 'audio',
+  'originalContentUrl' => $result,
+  'duration' => 60000,
+)
+            )
+        );
+    }
+	
+	  if ($command == 'lokasi' || $command == 'Lokasi' || $command == '/lokasi' || $command == '/Lokasi') {
+        $result = lokasi($options);
+        $balas = array(
+                    'replyToken' => $replyToken,
+                    'messages' => array(
+                                   	 array (
+						'id' => '325708',
+						'type' => 'location',
+						'title' => $options,
+						'address' => $result['loct1'],
+						'latitude' => $result['lat'],
+						'longitude' => $result['long'],
 					)
             )
         );
     }
-
-
-
-
-#tessting command sederhana pakai function	
-	if ($command == '/adminn') {
-		
-		$result = admin($options);
+ 
+	  if ($command == 'kosan sigawe') {
+        $balas = array(
+                    'replyToken' => $replyToken,
+                    'messages' => array(
+                                   	 array (
+						    'type' => 'location',
+							'title' => 'Kosan Sigawe',
+							'address' => 'Gg. Sigawe No. 14, Tembalang, Kota Semarang, Jawa Tengah 50275',
+							'latitude' => -7.057101,
+							'longitude' => 110.441235,
+					)
+            )
+        );
+    }   
+     
+    if ($command == 'yes') {
+         
+        $result = sederhana($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
                 array(
                     'type' => 'text',
-                    'text' => $result
+                    'text' => $result,
                 )
             )
         );
     }
-
-	if ($command == 'yes') {
-		
-		$result = sederhana($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => str_replace("HELLO","HAI",$result),
-                )
-            )
-        );
-    }
-
-}
-
-
+ 
 if (isset($balas)) {
     $result = json_encode($balas);
-//$result = ob_get_clean();
-
     file_put_contents('./balasan.json', $result);
-
-
-    $client->replyMessage($balas);
-}
-?>*/
-
-//show menu, saat join dan command /menu
-if ($type == 'join' || $command == 'menu') {
-    $text = "HALLO SEMUA";
-    $balas = array(
+    if ($profileName) {
+        $client->replyMessage($balas);
+    } elseif($type == 'join') {
+        $client->replyMessage($balas);
+    } else {
+    $balas_gagal = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $text
+                'text' => 'Maaf, Anonymousliem tidak dapat mendeteksi pesan dari kamu, silahkan ADD terlebih dahulu anonymousliem'
             )
         )
-    );
-}
-
-#command list text tanpa function
-if ($messages['type']=='text'){
-if ($command == '/hariini') {
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-               array (
-				  'type' => 'text',
-				  'text' => 'Hello, world',
-					)
-            )
-        );
-    }
-
-
-
-
-#tessting command sederhana pakai function	
-	if ($command == '/adminn') {
-		
-		$result = admin($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
-
-}
-
-
-if (isset($balas)) {
-    $result = json_encode($balas);
-//$result = ob_get_clean();
-
-    file_put_contents('./balasan.json', $result);
-
-
-    $client->replyMessage($balas);
+    ); }
+    $client->replyMessage($balas_gagal);
 }
 ?>
