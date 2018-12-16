@@ -55,6 +55,8 @@ function shalat($keyword) {
 } 
 function sederhana($keyword) {
 	$belajar = "HELLO WORLD\n";
+	$belajar .= "<br>";
+	$belajar .= " HELLO";
     return $belajar;
 }
 
