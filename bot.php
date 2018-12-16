@@ -2,7 +2,8 @@
 /*
 copyright @ medantechno.com
 Modified @ Farzain - zFz
-2017
+edited @ anonymousliem 
+2018
 
 */
 
@@ -54,14 +55,65 @@ function shalat($keyword) {
 } 
 function sederhana($keyword) {
 	$belajar = "HELLO WORLD\n";
-	$belajar .= "<br>";
-	$belajar .= " HELLO";
     return $belajar;
 }
-function sederhana1($keyword) {
-	$result = "HELLO PETTER";
-    return $result;
+
+#function text sederhana
+function admin ($keyword){
+	$result = "admin hari ini adalah";
+	return $result;
 }
+
+#function pake public api json
+function jadwalbelajar($keyword){
+	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
+	$response = Unirest\Request::get("$uri"); //responnya
+	$json = json_decode($response->raw_body, true); //format wajib
+	$result = $json['data']['Dhuhr']; //lokasi path dari api yang ingin diambil
+	return $result;
+}
+
+#function dari api xml
+function jadwalbelajar($keyword){
+	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
+	$xml = new SimpleXMLElement($uri);
+	$result = "title \n";
+	$result .= $xml->entry[0]->title;
+	$result .= "\n synonymous \n";
+	$result .= $xml->entry[0]->synonymous;
+	return $result;
+}
+
+#function text dari sebuah website
+function acara tv($keyword){
+$uri = "https://yuubase.herokuapp.com/acaratv.php?id=" .$keyword;
+$hasil = file_get_contents($uri);
+$result = str_ireplace(<br />, "\n", $hasil) ;
+return $result;
+}
+
+
+#function pake return $result
+function jadwalbola	($keyword){
+	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
+	$response = Unirest\Request::get("$uri"); //responnya
+	$json = json_decode($response->raw_body, true); //format wajib
+	$result = "jadwal chelsea jam" //lokasi path dari api yang ingin diambil
+	$result .= $json['data']['Fajr'];
+	return $result;
+}
+
+#function dengan return $parsed gunanya untuk pisah pisah berguna untuk carousel
+function jadwalbola	($keyword){
+	$uri = "https://time.siswandi.com/pray" .$keyword; //website penyedia public api
+	$response = Unirest\Request::get("$uri"); //responnya
+	$json = json_decode($response->raw_body, true); //format wajib
+	$parsed = array();
+	$parsed['a']=$json['data']['Fajr'];
+	$parsed['b']=$json['data']['Dhuhr'];
+	return $parsed;
+}
+
 #-------------------------[Function]-------------------------#
 
 //show menu, saat join dan command /menu
@@ -78,93 +130,41 @@ if ($type == 'join' || $command == 'menu') {
     );
 }
 
-//pesan bergambar
-if($message['type']=='text') {
-	
-	if ($command == 'imagemap') {
-		$balas = array(
-			'replyToken' => $replyToken,
-			'message' => array(
-				array (
-				'type' => 'imagemap',
-				'baseUrl' => 'https://example.com/bot/images/rm001',
-				'altText' => 'Imagemap',
-				'baseSize' => 
-				array (
-					'height' => 1040,
-					'width' => 1040,
-				),
-				'actions' => 
-				array (
-					0 => 
-					array (
-					'type' => 'message',
-					'text' => '1',
-					'area' => 
-					array (
-						'x' => 0,
-						'y' => 0,
-						'width' => 520,
-						'height' => 1040,
-					),
-					),
-					1 => 
-					array (
-					'type' => 'message',
-					'text' => '2',
-					'area' => 
-					array (
-						'x' => 520,
-						'y' => 0,
-						'width' => 520,
-						'height' => 1040,
-					),
-					),
-					2 => 
-					array (
-					'type' => 'message',
-					'text' => '3',
-					'area' => 
-					array (
-						'x' => 0,
-						'y' => 0,
-						'width' => 1040,
-						'height' => 520,
-					),
-					),
-					3 => 
-					array (
-					'type' => 'message',
-					'text' => '4',
-					'area' => 
-					array (
-						'x' => 0,
-						'y' => 520,
-						'width' => 1040,
-						'height' => 520,
-					),
-					),					
-				),
-				)
-			)
-		);
-	}
-	
-	if ($command == 'yes') {
+#command list text tanpa function
+if ($messages['type']=='text'){
+if ($command == '/hariini') {
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+               array (
+				  'type' => 'text',
+				  'text' => 'Hello, world',
+					)
+            )
+        );
+    }
+
+
+
+
+#tessting command sederhana pakai function	
+	if ($command == '/adminn') {
 		
-		$result = sederhana($options);
+		$result = admin($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
                 array(
                     'type' => 'text',
-                    'text' => str_replace("HELLO","HAI",$result),
+                    'text' => $result
                 )
             )
         );
     }
 
 }
+
+
 if (isset($balas)) {
     $result = json_encode($balas);
 //$result = ob_get_clean();
