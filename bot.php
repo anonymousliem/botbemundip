@@ -117,7 +117,7 @@ function jadwalbola1($keyword){
 }
 
 #-------------------------[Function]-------------------------#
-
+/*
 //show menu, saat join dan command /menu
 if ($type == 'join' || $command == 'menu') {
     $text = "HALLO SEMUA";
@@ -173,6 +173,66 @@ if ($command == '/hariini') {
                 array(
                     'type' => 'text',
                     'text' => str_replace("HELLO","HAI",$result),
+                )
+            )
+        );
+    }
+
+}
+
+
+if (isset($balas)) {
+    $result = json_encode($balas);
+//$result = ob_get_clean();
+
+    file_put_contents('./balasan.json', $result);
+
+
+    $client->replyMessage($balas);
+}
+?>*/
+
+//show menu, saat join dan command /menu
+if ($type == 'join' || $command == 'menu') {
+    $text = "HALLO SEMUA";
+    $balas = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+
+#command list text tanpa function
+if ($messages['type']=='text'){
+if ($command == '/hariini') {
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+               array (
+				  'type' => 'text',
+				  'text' => 'Hello, world',
+					)
+            )
+        );
+    }
+
+
+
+
+#tessting command sederhana pakai function	
+	if ($command == '/adminn') {
+		
+		$result = admin($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
                 )
             )
         );
