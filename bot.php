@@ -253,14 +253,18 @@ if ($type == 'join' || $command == 'menu') {
       ),
       1 => 
       array (
-        'type' => 'message',
-        'label' => 'No',
-        'text' => 'no',
-      ),
+  'type' => 'uri',
+  'label' => 'View details',
+  'uri' => 'http://google.com/',
+  'altUri' => 
+  array (
+    'desktop' => 'http://google.com',
+  ),
+),
     ),
   ),
 )
-                
+
 
                 )
             );
