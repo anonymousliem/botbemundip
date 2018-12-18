@@ -81,6 +81,19 @@ function bott($keyword) {
     return $result;
 }
 
+function sigawe($keyword) {
+    $result = array (
+                        'type' => 'location',
+                        'title' => 'my location',
+                        'address' => 'Sigawe 14 tembalang',
+                        'latitude' => 35.65910807942214688637250219471752643585205078125,
+                        'longitude' => 139.70372892916202545166015625,
+                        );
+    
+
+    return $result;
+}
+
 function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
     $list_jwb = array(		#ini adalah kumpulan list jawaban random yang akan keluar, bisa kalian ubah sesuka hati kalian
 		'Ya',
@@ -105,16 +118,6 @@ function lokasi($keyword) {
     return $parsed; 
 }
 
-function kosan($keyword) { 	#Kalau di bot Yuuko-chan ini adalah Function /lokasi, PUBLIC API ini dapat dari website maps.google.com
-    $uri = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=kos%20sigawe%20ceria%2014"; 
-    $response = Unirest\Request::get("$uri"); 
-    $json = json_decode($response->raw_body, true); 
-    $parsed = array(); 
-    $parsed['lat'] = $json['results']['0']['geometry']['location']['lat']; 
-    $parsed['long'] = $json['results']['0']['geometry']['location']['lng']; 
-	$parsed['loct1'] = $json['results']['0']['address_components']['0']['long_name'];
-    return $parsed; 
-}
 #-------------------------[Function]-------------------------#
 
 
@@ -193,20 +196,7 @@ if ($type == 'join' || $command == 'menu') {
         );
     }
  
-	  if ($command == 'kosan sigawe') {
-        $balas = array(
-                    'replyToken' => $replyToken,
-                    'messages' => array(
-                                   	 array (
-						    'type' => 'location',
-							'title' => 'Kosan Sigawe',
-							'address' => 'Gg. Sigawe No. 14, Tembalang, Kota Semarang, Jawa Tengah 50275',
-							'latitude' => -7.057101,
-							'longitude' => 110.441235,
-					)
-            )
-        );
-    }   
+	  
      
     if ($command == 'yes') {
          
@@ -235,6 +225,22 @@ if ($type == 'join' || $command == 'menu') {
             )
         );
     }
+
+        if ($command == 'sigawe' || $command == '/Sigawe' || $command == 'Sigawe' || $command == '/sigawe'){
+         
+        $result = sigawe($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array (
+
+                    'type' => 'location',
+                    'location' => $result,
+                        
+            )
+        )
+    );
+}
 
 if (isset($balas)) {
     $result = json_encode($balas);
