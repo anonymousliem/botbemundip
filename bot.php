@@ -238,28 +238,30 @@ if ($type == 'join' || $command == 'menu') {
             'messages' => array(
                 array (
   'type' => 'template',
-  'altText' => 'konfirm',
+  'altText' => 'this is a confirm template',
   'template' => 
   array (
     'type' => 'confirm',
-    'text' => 'kamu yakin?',
+    'text' => 'Are you sure?',
     'actions' => 
     array (
       0 => 
       array (
         'type' => 'message',
         'label' => 'Yes',
-        'text' => 'iyaa',
+        'text' => 'yes',
       ),
       1 => 
       array (
-        'type' => 'uri',
+        'type' => 'message',
         'label' => 'No',
-        'uri' => 'www.google.com',
+        'text' => 'no',
       ),
     ),
   ),
 )
+                
+
                 )
             );
         }
