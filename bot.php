@@ -183,6 +183,57 @@ if ($type == 'join' || $command == 'menu') {
             )
         );
     }
+
+
+    if ($command == 'creator' || $command == 'Creator' || $command == '/creator' || $command == '/Creator') {
+        $result = lokasi($options);
+        $balas = array(
+                    'replyToken' => $replyToken,
+                    'messages' => array(
+                     array (
+  'type' => 'template',
+  'altText' => 'This is a buttons template',
+  'template' => 
+  array (
+    'type' => 'buttons',
+    'thumbnailImageUrl' => 'https://hobbydb-production.s3.amazonaws.com/processed_uploads/subject_photo/subject_photo/image/14935/1469053350-30688-5549/Creator.png',
+    'imageAspectRatio' => 'rectangle',
+    'imageSize' => 'cover',
+    'imageBackgroundColor' => '#FFFFFF',
+    'title' => 'Menu',
+    'text' => 'Please select',
+    'defaultAction' => 
+    array (
+      'type' => 'uri',
+      'label' => 'View detail',
+      'uri' => 'http://example.com/page/123',
+    ),
+    'actions' => 
+    array (
+      0 => 
+      array (
+        'type' => 'postback',
+        'label' => 'Buy',
+        'data' => 'action=buy&itemid=123',
+      ),
+      1 => 
+      array (
+        'type' => 'postback',
+        'label' => 'Add to cart',
+        'data' => 'action=add&itemid=123',
+      ),
+      2 => 
+      array (
+        'type' => 'uri',
+        'label' => 'View detail',
+        'uri' => 'http://example.com/page/123',
+      ),
+    ),
+  ),
+)
+            )
+        );
+    }
  
 	  
      
@@ -260,9 +311,9 @@ if ($type == 'join' || $command == 'menu') {
   array (
     'desktop' => 'http://google.com',
   ),
-),
     ),
-  ),
+        ),
+      ),
 )
 
 
