@@ -81,18 +81,6 @@ function bott($keyword) {
     return $result;
 }
 
-function sigawe($keyword) {
-    $result = array (
-                        'type' => 'location',
-                        'title' => 'my location',
-                        'address' => 'Sigawe 14 tembalang',
-                        'latitude' => 35.65910807942214688637250219471752643585205078125,
-                        'longitude' => 139.70372892916202545166015625,
-                        );
-    
-
-    return $result;
-}
 
 function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
     $list_jwb = array(		#ini adalah kumpulan list jawaban random yang akan keluar, bisa kalian ubah sesuka hati kalian
@@ -228,16 +216,16 @@ if ($type == 'join' || $command == 'menu') {
 
         if ($command == 'sigawe' || $command == '/Sigawe' || $command == 'Sigawe' || $command == '/sigawe'){
          
-        $result = sigawe($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
                 array (
-
-                    'type' => 'location',
-                    'location' => $result,
-                        
-            )
+  'type' => 'location',
+  'title' => 'my location',
+  'address' => '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+  'latitude' => 35.65910807942214688637250219471752643585205078125,
+  'longitude' => 139.70372892916202545166015625,
+                )
         )
     );
 }
