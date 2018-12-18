@@ -220,15 +220,51 @@ if ($type == 'join' || $command == 'menu') {
             'replyToken' => $replyToken,
             'messages' => array(
                 array (
-  'type' => 'location',
-  'title' => 'my location',
-  'address' => '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
-  'latitude' => 35.65910807942214688637250219471752643585205078125,
-  'longitude' => 139.70372892916202545166015625,
+          'type' => 'location',
+          'title' => 'my location',
+          'address' => '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+          'latitude' => 35.65910807942214688637250219471752643585205078125,
+          'longitude' => 139.70372892916202545166015625,
+                        )
                 )
-        )
-    );
-}
+            );
+        }
+
+
+        if ($command == 'confirm'){
+         
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array (
+  'type' => 'template',
+  'altText' => 'konfirm',
+  'template' => 
+  array (
+    'type' => 'confirm',
+    'text' => 'kamu yakin?',
+    'actions' => 
+    array (
+      0 => 
+      array (
+        'type' => 'message',
+        'label' => 'Yes',
+        'text' => 'iyaa',
+      ),
+      1 => 
+      array (
+        'type' => 'uri',
+        'label' => 'No',
+        'uri' => 'www.google.com',
+      ),
+    ),
+  ),
+)
+                )
+            );
+        }
+
+
 
 if (isset($balas)) {
     $result = json_encode($balas);
