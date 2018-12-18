@@ -67,13 +67,17 @@ function shalat($keyword) {
     $parsed['maghrib'] = $json['data']['Maghrib']; 
     $parsed['isya'] = $json['data']['Isha']; 
     return $parsed; 
-} 
-function sederhana($keyword) {
-    $belajar = "Y";
-    return $belajar;
 }
+
+
 function sederhana1($keyword) {
     $result = "HELLO PETTER";
+    return $result;
+}
+
+
+function bott($keyword) {
+    $result = "test bot";
     return $result;
 }
 
@@ -112,9 +116,8 @@ function kosan($keyword) { 	#Kalau di bot Yuuko-chan ini adalah Function /lokasi
     return $parsed; 
 }
 #-------------------------[Function]-------------------------#
- 
- 
- 
+
+
 //show menu, saat join dan command /menu
 if ($type == 'join' || $command == 'menu') {
     $text = "HALLO SEMUA";
@@ -219,6 +222,20 @@ if ($type == 'join' || $command == 'menu') {
         );
     }
  
+    if ($command == 'bottt') {
+         
+        $result = bott($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result,
+                )
+            )
+        );
+    }
+
 if (isset($balas)) {
     $result = json_encode($balas);
     file_put_contents('./balasan.json', $result);
