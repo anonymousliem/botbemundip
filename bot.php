@@ -200,33 +200,22 @@ if ($type == 'join' || $command == 'menu') {
     'imageAspectRatio' => 'rectangle',
     'imageSize' => 'cover',
     'imageBackgroundColor' => '#FFFFFF',
-    'title' => 'Menu',
-    'text' => 'Please select',
+    'title' => 'MENU CREATOR',
+    'text' => 'creator by anonymousliem',
     'defaultAction' => 
     array (
       'type' => 'uri',
       'label' => 'View detail',
-      'uri' => 'http://example.com/page/123',
+      'uri' => 'http://instagram.com/anonymousliem',
     ),
     'actions' => 
     array (
+
       0 => 
-      array (
-        'type' => 'postback',
-        'label' => 'Buy',
-        'data' => 'action=buy&itemid=123',
-      ),
-      1 => 
-      array (
-        'type' => 'postback',
-        'label' => 'Add to cart',
-        'data' => 'action=add&itemid=123',
-      ),
-      2 => 
       array (
         'type' => 'uri',
         'label' => 'View detail',
-        'uri' => 'http://example.com/page/123',
+        'uri' => 'http://instagram.com/anonymousliem',
       ),
     ),
   ),
