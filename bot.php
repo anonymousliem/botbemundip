@@ -69,6 +69,17 @@ function shalat($keyword) {
     return $parsed; 
 }
 
+function bitly($keyword) {    
+    $uri = "https://api-ssl.bitly.com/v3/shorten?access_token=e75a7dfcb1ed94f5a19149ed120482e8f6367dc6&longUrl=" . $keyword;    #Ubah kata kata MASUKAN_APPID_KALIAN dengan APP ID kalian dengan cara daftar di website bitly.com, video tutorialnya ada di folder Materi -> 9 Lain Lain
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true); 
+    $result = "Berhasil\nURL Asli: ";
+    $result .= $json['data']['long_url'];
+    $result .= "\nURL Pendek: ";
+    $result .= $json['data']['url'];
+    return $result;
+}
+
 
 function sederhana1($keyword) {
     $result = "HELLO PETTER";
@@ -126,6 +137,22 @@ if ($type == 'join' || $command == 'menu') {
      if ($command == 'apakah' || $command == 'Apakah' || $command == '/apakah') {
          
         $result = apakah($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result,
+                )
+            )
+        );
+    }
+
+
+
+     if ($command == 'bitly' || $command == '/bitly' || $command == 'Bitly') {
+         
+        $result = bitly($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
