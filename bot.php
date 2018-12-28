@@ -289,7 +289,7 @@ if($message['type']=='text') {
 
 
 if ($command == 'translate' || $command == '/translate' ) {
-        $result = tts($options);
+        $result = translate($options);
         $balas = array(
                     'replyToken' => $replyToken,
                     'messages' => array(
