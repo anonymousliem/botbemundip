@@ -41,6 +41,24 @@ if (count($pesan_datang) > 2) {
 }
  
 #-------------------------[Function]-------------------------# # 
+function instagram($keyword) {
+    $uri = "https://rest.farzain.com/api/ig_profile.php?id=" . $keyword . "&apikey=fDh6y7ZwXJ24eiArhGEJ55HgA";
+  
+    $response = Unirest\Request::get("$uri");
+  
+    $json = json_decode($response->raw_body, true);
+    $parsed = array();
+    $parsed['a1'] = $json['info']['username'];
+    $parsed['a2'] = $json['info']['bio'];
+    $parsed['a3'] = $json['count']['followers'];
+    $parsed['a4'] = $json['count']['following'];
+    $parsed['a5'] = $json['count']['post'];
+    $parsed['a6'] = $json['info']['full_name'];
+    $parsed['a7'] = $json['info']['profile_pict'];
+    $parsed['a8'] = "https://www.instagram.com/" . $keyword;
+    return $parsed;
+}
+
 function shalat($keyword) {
     $uri = "https://time.siswadi.com/pray/" . $keyword;
     $response = Unirest\Request::get("$uri");
@@ -144,6 +162,44 @@ if ($type == 'join' || $command == 'menu') {
     );
 }
  
+if($message['type']=='text') {
+    if ($command == '/instagram') { 
+        
+        $result = instagram($options);
+        $altText2 = "Followers : " . $result['a3'];
+        $altText2 .= "\nFollowing :" . $result['a4'];
+        $altText2 .= "\nPost :" . $result['a5'];
+        $balas = array( 
+            'replyToken' => $replyToken, 
+            'messages' => array( 
+                array ( 
+                        'type' => 'template', 
+                          'altText' => 'Instagram' . $options, 
+                          'template' =>  
+                          array ( 
+                            'type' => 'buttons', 
+                            'thumbnailImageUrl' => $result['a7'], 
+                            'imageAspectRatio' => 'rectangle', 
+                            'imageSize' => 'cover', 
+                            'imageBackgroundColor' => '#FFFFFF', 
+                            'title' => $result['a6'], 
+                            'text' => $altText2, 
+                            'actions' =>  
+                            array ( 
+                              0 =>  
+                              array ( 
+                                'type' => 'uri', 
+                                'label' => 'Check', 
+                                'uri' => $result['a8'],
+                              ), 
+                            ), 
+                          ), 
+                        ) 
+            ) 
+        ); 
+    }
+}
+
 if($message['type']=='text') {
         if ($command == '/shalat') {
         $result = shalat($options);
