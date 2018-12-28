@@ -78,21 +78,6 @@ function tts2($keyword) {
     return $result; 
 } 
  
-function shalat($keyword) { 
-    $uri = "https://time.siswadi.com/pray/" . $keyword; 
- 
-    $response = Unirest\Request::get("$uri"); 
- 
-    $json = json_decode($response->raw_body, true); 
-    $parsed = array(); 
-    $parsed['sunrise'] = $json['data']['Sunrise']; 
-    $parsed['shubuh'] = $json['data']['Fajr']; 
-    $parsed['dzuhur'] = $json['data']['Dhuhr']; 
-    $parsed['ashar'] = $json['data']['Asr']; 
-    $parsed['maghrib'] = $json['data']['Maghrib']; 
-    $parsed['isya'] = $json['data']['Isha']; 
-    return $parsed; 
-}
 
 function bitly($keyword) {    
     $uri = "https://api-ssl.bitly.com/v3/shorten?access_token=e75a7dfcb1ed94f5a19149ed120482e8f6367dc6&longUrl=" . $keyword;    #Ubah kata kata MASUKAN_APPID_KALIAN dengan APP ID kalian dengan cara daftar di website bitly.com, video tutorialnya ada di folder Materi -> 9 Lain Lain
@@ -174,7 +159,7 @@ if($message['type']=='text') {
     }
 }
 
- 
+
      if ($command == 'apakah' || $command == 'Apakah' || $command == '/apakah') {
          
         $result = apakah($options);
