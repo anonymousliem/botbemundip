@@ -41,6 +41,31 @@ if (count($pesan_datang) > 2) {
 }
  
 #-------------------------[Function]-------------------------# # 
+function shalat($keyword) {
+    $uri = "https://time.siswadi.com/pray/" . $keyword;
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $result = "「Jadwal shalat」";
+    $result .= "\nLokasi : ";
+    $result .= $json['location']['address'];
+    $result .= "\nTanggal : ";
+    $result .= $json['time']['date'];
+    $result .= "\n\nShubuh : ";
+    $result .= $json['data']['Fajr'];
+    $result .= "\nDzuhur : ";
+    $result .= $json['data']['Dhuhr'];
+    $result .= "\nAshar : ";
+    $result .= $json['data']['Asr'];
+    $result .= "\nMaghrib : ";
+    $result .= $json['data']['Maghrib'];
+    $result .= "\nIsya : ";
+    $result .= $json['data']['Isha'];
+    $result .= "\n\nPencarian : Google";
+    $result .= "\n「Done~」";
+    return $result;
+}
+
+
 function tts($keyword) {        
     $uri = "https://translate.google.com/translate_tts?ie=UTF-8&tl=id-ID&client=tw-ob&q=" . $keyword; 
     $result = $uri; 
@@ -133,6 +158,22 @@ if ($type == 'join' || $command == 'menu') {
         )
     );
 }
+ 
+if($message['type']=='text') {
+        if ($command == '/shalat') {
+        $result = shalat($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result
+                )
+            )
+        );
+    }
+}
+
  
      if ($command == 'apakah' || $command == 'Apakah' || $command == '/apakah') {
          
