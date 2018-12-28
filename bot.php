@@ -134,13 +134,22 @@ function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
 
 
 function lokasi($keyword) {
-    $uri = "https://time.siswadi.com/geozone/?address=" . $keyword; 
+ /*   $uri = "https://time.siswadi.com/geozone/?address=" . $keyword; 
     $response = Unirest\Request::get("$uri"); 
     $json = json_decode($response->raw_body, true); 
     $parsed = array(); 
     $parsed['lat'] = $json['data']['latitude']; 
     $parsed['long'] = $json['data']['longitude']; 
 	$parsed['loct1'] = $json['data']['address'];
+    return $parsed; */
+
+$uri = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $keyword ."&key=AIzaSyCBUruGzL7XZSlcxnfKLRV6PXufZM9eiVM"; 
+    $response = Unirest\Request::get("$uri"); 
+    $json = json_decode($response->raw_body, true); 
+    $parsed = array(); 
+    $parsed['lat'] = $json['results']['0']['geometry']['location']['lat']; 
+    $parsed['long'] = $json['results']['0']['geometry']['location']['lng']; 
+    $parsed['loct1'] = $json['results']['0']['formatted_address'];
     return $parsed; 
 }
 
@@ -328,7 +337,6 @@ if ($command == 'translate' || $command == '/translate' ) {
 
 
     if ($command == 'creator' || $command == 'Creator' || $command == '/creator' || $command == '/Creator') {
-        $result = lokasi($options);
         $balas = array(
                     'replyToken' => $replyToken,
                     'messages' => array(
