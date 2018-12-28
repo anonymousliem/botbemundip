@@ -98,16 +98,6 @@ function tts2($keyword) {
     return $result; 
 } 
  
-function bitly($keyword) {    
-    $uri = "https://api-ssl.bitly.com/v3/shorten?access_token=e75a7dfcb1ed94f5a19149ed120482e8f6367dc6&longUrl=" . $keyword;    #Ubah kata kata MASUKAN_APPID_KALIAN dengan APP ID kalian dengan cara daftar di website bitly.com, video tutorialnya ada di folder Materi -> 9 Lain Lain
-    $response = Unirest\Request::get("$uri");
-    $json = json_decode($response->raw_body, true); 
-    $result = "Berhasil\nURL Asli: ";
-    $result .= $json['data']['long_url'];
-    $result .= "\nURL Pendek: ";
-    $result .= $json['data']['url'];
-    return $result;
-}
 
 
 function bott($keyword) {
@@ -141,10 +131,22 @@ function lokasi($keyword) {
 }
 
 function translate($keyword) {        
-    $uri = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181228T200704Z.7fb9eff9dbf5a160.a422eb8ba04807d17ca2427bc8ed1d2bdf6e4d57&text=" . $keyword . "&lang=id-en="; 
+    $uri="https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181228T200704Z.7fb9eff9dbf5a160.a422eb8ba04807d17ca2427bc8ed1d2bdf6e4d57&text=".$keyword."&lang=id-en";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true); 
     $result = $json['text'];
+    return $result;
+}
+
+
+function bitly($keyword) {    
+    $uri = "https://api-ssl.bitly.com/v3/shorten?access_token=e75a7dfcb1ed94f5a19149ed120482e8f6367dc6&longUrl=" . $keyword;    #Ubah kata kata MASUKAN_APPID_KALIAN dengan APP ID kalian dengan cara daftar di website bitly.com, video tutorialnya ada di folder Materi -> 9 Lain Lain
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true); 
+    $result = "Berhasil\nURL Asli: ";
+    $result .= $json['data']['long_url'];
+    $result .= "\nURL Pendek: ";
+    $result .= $json['data']['url'];
     return $result;
 }
 
