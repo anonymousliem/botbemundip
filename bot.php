@@ -162,13 +162,17 @@ if ($type == 'join' || $command == 'menu') {
     );
 }
  
+
 if($message['type']=='text') {
     if ($command == '/instagram') { 
         
         $result = instagram($options);
-        $altText2 = "Followers : " . $result['a3'];
+        $altText2 .= "Bio :" . $result['a2'];
+        $altText2 = "\nFollowers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nPost :" . $result['a5'];
+        
+
         $balas = array( 
             'replyToken' => $replyToken, 
             'messages' => array( 
@@ -199,6 +203,9 @@ if($message['type']=='text') {
         ); 
     }
 }
+
+
+
 
 if($message['type']=='text') {
         if ($command == '/shalat') {
@@ -434,7 +441,7 @@ if (isset($balas)) {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => 'Maaf, Anonymousliem tidak dapat mendeteksi pesan dari kamu, silahkan ADD terlebih dahulu anonymousliem'
+                'text' => 'Maaf, bot tidak dapat mendeteksi pesan dari kamu, silahkan ADD terlebih dahulu'
             )
         )
     ); }
