@@ -80,7 +80,7 @@ function shalat($keyword) {
     $result .= $json['data']['Maghrib'];
     $result .= "\nIsya : ";
     $result .= $json['data']['Isha'];
-    $result = "\n\n sumber : time.siswandi.com/pray";
+    $result .= "\n\n sumber : time.siswandi.com/pray";
 
     return $result;
 }
@@ -179,7 +179,8 @@ if($message['type']=='text') {
     if ($command == '/instagram') { 
         
         $result = instagram($options);
-        $altText2 = "\nFollowers : " . $result['a3'];
+        $altText2 .= "\nBio : " . $result['a2'];
+        $altText2 .= "\nFollowers : " . $result['a3'];
         $altText2 .= "\nFollowing :" . $result['a4'];
         $altText2 .= "\nPost :" . $result['a5'];
         
