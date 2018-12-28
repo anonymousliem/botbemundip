@@ -99,12 +99,10 @@ function tts2($keyword) {
 } 
  
 function translate($keyword) {        
-    $uri = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181228T200704Z.7fb9eff9dbf5a160.a422eb8ba04807d17ca2427bc8ed1d2bdf6e4d57&text=" . $keyword . "&lang=id-en="; 
-    $response = Unirest\Request::get("$uri");
-    $json = json_decode($response->raw_body, true); 
-    $result = $json['text'];
-    return $result;
-}
+    $uri = "https://translate.google.co.id/?hl=id#view=home&op=translate&sl=id&tl=en&text=" . $keyword; 
+    $result = $uri; 
+    return $result; 
+} 
 
 function bitly($keyword) {    
     $uri = "https://api-ssl.bitly.com/v3/shorten?access_token=e75a7dfcb1ed94f5a19149ed120482e8f6367dc6&longUrl=" . $keyword;    #Ubah kata kata MASUKAN_APPID_KALIAN dengan APP ID kalian dengan cara daftar di website bitly.com, video tutorialnya ada di folder Materi -> 9 Lain Lain
@@ -136,7 +134,7 @@ function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
 
 
 function lokasi($keyword) {
-   $uri = "https://time.siswadi.com/geozone/?address=" . $keyword; 
+    $uri = "https://time.siswadi.com/geozone/?address=" . $keyword; 
     $response = Unirest\Request::get("$uri"); 
     $json = json_decode($response->raw_body, true); 
     $parsed = array(); 
@@ -145,15 +143,8 @@ function lokasi($keyword) {
 	$parsed['loct1'] = $json['data']['address'];
     return $parsed; 
 
-/*$uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" . $keyword . "&key=AIzaSyCBUruGzL7XZSlcxnfKLRV6PXufZM9eiVM"; 
-    $response = Unirest\Request::get("$uri"); 
-    $json = json_decode($response->raw_body, true); 
-    $parsed = array(); 
-    $parsed['lat'] = $json['results']['geometry']['location']['lat']; 
-    $parsed['long'] = $json['results']['geometry']['location']['lng']; 
-    $parsed['loct1'] = $json['results']['formatted_address'];
-    return $parsed; 
-}*/
+    
+}
 
 #-------------------------[Function]-------------------------#
 function cuaca($keyword) {
