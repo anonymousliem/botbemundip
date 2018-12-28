@@ -143,13 +143,13 @@ function lokasi($keyword) {
 	$parsed['loct1'] = $json['data']['address'];
     return $parsed; */
 
-$uri = "https://maps.googleapis.com/maps/api/geocode/json?address=" . $keyword ."&key=AIzaSyCBUruGzL7XZSlcxnfKLRV6PXufZM9eiVM"; 
+$uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" . $keyword . "&key=AIzaSyCBUruGzL7XZSlcxnfKLRV6PXufZM9eiVM"; 
     $response = Unirest\Request::get("$uri"); 
     $json = json_decode($response->raw_body, true); 
     $parsed = array(); 
-    $parsed['lat'] = $json['results']['0']['geometry']['location']['lat']; 
-    $parsed['long'] = $json['results']['0']['geometry']['location']['lng']; 
-    $parsed['loct1'] = $json['results']['0']['formatted_address'];
+    $parsed['lat'] = $json['results']['geometry']['location']['lat']; 
+    $parsed['long'] = $json['results']['geometry']['location']['lng']; 
+    $parsed['loct1'] = $json['results']['formatted_address'];
     return $parsed; 
 }
 
