@@ -80,8 +80,8 @@ function shalat($keyword) {
     $result .= $json['data']['Maghrib'];
     $result .= "\nIsya : ";
     $result .= $json['data']['Isha'];
-    $result .= "\n\nPencarian : Google";
-    $result .= "\n「Done~」";
+    $result = "\n\n sumber : time.siswandi.com/pray";
+
     return $result;
 }
 
@@ -116,12 +116,6 @@ function bitly($keyword) {
 }
 
 
-function sederhana1($keyword) {
-    $result = "HELLO PETTER";
-    return $result;
-}
-
-
 function bott($keyword) {
     $result = "test bot";
     return $result;
@@ -132,8 +126,6 @@ function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
     $list_jwb = array(		#ini adalah kumpulan list jawaban random yang akan keluar, bisa kalian ubah sesuka hati kalian
 		'Ya',
 		'Tidak',
-		'Bisa jadi',
-		'Tentu tidak',
 		);
     $jaws = array_rand($list_jwb);
     $jawab = $list_jwb[$jaws];
@@ -157,19 +149,20 @@ function cuaca($keyword) {
     $uri = "http://api.openweathermap.org/data/2.5/weather?q=" . $keyword . ",ID&units=metric&appid=e172c2f3a3c620591582ab5242e0e6c4";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
-    $result = "Halo Kak ^_^ Ini ada Ramalan Cuaca Untuk Daerah ";
+    $result = "Ini ada Ramalan Cuaca Untuk Daerah ";
     $result .= $json['name'];
     $result .= " Dan Sekitarnya";
     $result .= "\n\nCuaca : ";
     $result .= $json['weather']['0']['main'];
     $result .= "\nDeskripsi : ";
     $result .= $json['weather']['0']['description'];
+    $result .= " \n\n Sumber : openweathermap.org";
     return $result;
 }
 
 //show menu, saat join dan command /menu
-if ($type == 'join' || $command == 'menu') {
-    $text = "HALLO SEMUA";
+if ($type == 'join') {
+    $text = "Terima kasih sudah mengundang saya di grup ini";
     $balas = array(
         'replyToken' => $replyToken,
         'messages' => array(
@@ -404,7 +397,7 @@ if($message['type']=='text') {
     }
 }
 
-    if ($command == 'bottt') {
+/*    if ($command == 'bottt') {
          
         $result = bott($options);
         $balas = array(
@@ -417,7 +410,7 @@ if($message['type']=='text') {
             )
         );
     }
-
+*/
         if ($command == 'sigawe' || $command == '/Sigawe' || $command == 'Sigawe' || $command == '/sigawe'){
          
         $balas = array(
@@ -434,45 +427,6 @@ if($message['type']=='text') {
             );
         }
 
-
-        if ($command == 'confirm'){
-         
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array (
-  'type' => 'template',
-  'altText' => 'this is a confirm template',
-  'template' => 
-  array (
-    'type' => 'confirm',
-    'text' => 'Are you sure?',
-    'actions' => 
-    array (
-      0 => 
-      array (
-        'type' => 'message',
-        'label' => 'Yes',
-        'text' => 'yes',
-      ),
-      1 => 
-      array (
-  'type' => 'uri',
-  'label' => 'View details',
-  'uri' => 'http://google.com/',
-  'altUri' => 
-  array (
-    'desktop' => 'http://google.com',
-  ),
-    ),
-        ),
-      ),
-)
-
-
-                )
-            );
-        }
 
 
 
