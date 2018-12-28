@@ -134,7 +134,7 @@ function translate($keyword) {
     $uri="https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181228T200704Z.7fb9eff9dbf5a160.a422eb8ba04807d17ca2427bc8ed1d2bdf6e4d57&text=".$keyword."&lang=id-en";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true); 
-    $result = $json['text'];
+    $result = $json['text']['0'];
     return $result;
 }
 
@@ -287,7 +287,7 @@ if($message['type']=='text') {
     }
 
 
-if ($command == 'translate' || $command == '/translate' ) {
+if ($command == 'translate' || $command == '/translate' || $command == '/terjemahan' ) {
         $result = translate($options);
         $balas = array(
                     'replyToken' => $replyToken,
