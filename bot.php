@@ -236,7 +236,7 @@ if ($command == '/keyword' || $command == 'keyword' || $command == 'Keyword') {
         );
     }
 
-if($command == '/booking' || $command == 'Booking' || $command == 'booking')
+if($command == '/booking' || $command == 'Booking' || $command == '/jadwal' || $command == 'Jadwal' )
     {   
                              $balas = array(
                             'replyToken' => $replyToken,                                                        
