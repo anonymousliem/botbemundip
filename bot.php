@@ -113,6 +113,28 @@ function ashiap($keyword) {
     return $result;
 }
 
+function atta($keyword) {
+    $result = "Fitur Lain :\n";
+    $result .= "1. /say [keyword]\n";
+    $result .= "2. /sayen [keyword]\n";
+    $result .= "3. /bitly [linkpanjang]\n";
+    $result .= "4. /apakah [keyword]\n";
+    $result .= "5. /shalat [nama daerah]\n";
+    $result .= "6. /instagram [username]\n";
+    $result .= "7. /cuaca [nama daerah]\n";
+    $result .= "8. /translate [keyword]\n\n";
+    $result .= "Contoh :\n";
+    $result .= "1. /say Terima kasih\n";
+    $result .= "2. /sayen thank you\n";
+    $result .= "3. /bitly www.google.com\n";
+    $result .= "4. /apakah saya kerang ajaib?\n";
+    $result .= "5. /shalat semarang\n";
+    $result .= "6. /instagram anonymousliem\n";
+    $result .= "7. /cuaca medan\n";
+    $result .= "8. /translate aku cinta kamu";
+    return $result;
+}
+
 
 function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
     $list_jwb = array(		#ini adalah kumpulan list jawaban random yang akan keluar, bisa kalian ubah sesuka hati kalian
@@ -211,7 +233,7 @@ else if($command)
                             'messages' => array(
                                 array(
                                         'type' => 'text',                                   
-                                        'text' => 'Maap keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
+                                        'text' => 'Maap keyword tidak ditemukan. silahkan ketik /keyword atau /fitur'                                       
                                     
                                     )
                             )
@@ -225,6 +247,20 @@ else if($command)
 if ($command == '/keyword' || $command == 'keyword' || $command == 'Keyword') {
          
         $result = ashiap($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result,
+                )
+            )
+        );
+    }
+
+    if ($command == '/fitur' || $command == '/fiturlain' || $command == 'fitur') {
+         
+        $result = atta($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
@@ -288,7 +324,7 @@ if($command == '/help' || $command == '/about' )
                             'messages' => array(
                                 array(
                                         'type' => 'text',                                   
-                        'text' => 'Halo kak, saya adalah bot bem undip yang akan membantu kakak dalam berbagai hal.'                                       
+                        'text' => 'Halo kak, saya adalah bot bem undip yang akan membantu kakak dalam berbagai hal. silahkan ketik /keyword atau /fitur untuk menggunakan fitur saya'                                       
                                     
                                     )
                             )
