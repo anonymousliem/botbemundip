@@ -105,6 +105,14 @@ function tolong($keyword) {
     return $result;
 }
 
+function ashiap($keyword) {
+    $result = "keyword :\n";
+    $result .= "- /sop :\n";
+    $result .= "- /jadwal :\n";
+    $result .= "- /livereport :\n";
+    return $result;
+}
+
 
 function apakah($keyword){		#Kalau di bot Yuuko-chan ini adalah Function Apakah
     $list_jwb = array(		#ini adalah kumpulan list jawaban random yang akan keluar, bisa kalian ubah sesuka hati kalian
@@ -203,7 +211,7 @@ else if($command)
                             'messages' => array(
                                 array(
                                         'type' => 'text',                                   
-                                        'text' => 'Sorie nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
+                                        'text' => 'Maap keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
                                     
                                     )
                             )
@@ -214,6 +222,19 @@ else if($command)
 }
 
 
+if ($command == '/keyword' || $command == 'keyword' || $command == 'Keyword') {
+         
+        $result = ashiap($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result,
+                )
+            )
+        );
+    }
 
  
 
@@ -256,6 +277,7 @@ if($message['type']=='text') {
         ); 
     }
 }
+
 
 
 
@@ -330,7 +352,7 @@ if ($command == 'translate' || $command == '/translate' || $command == '/terjema
                     'messages' => array(
                                     array(
                     'type' => 'text',
-                    'text' => $result,
+                    'text' => $result
                 )
             )
         );
