@@ -251,6 +251,20 @@ if($command == '/booking' || $command == 'Booking' || $command == '/jadwal' || $
                         
     }
 
+if($command == '/sop' || $command == 'SOP' )
+    {   
+                             $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                                        'text' => 'http://bit.ly/sopbarubemundip2019'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
 
 
  
