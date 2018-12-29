@@ -251,7 +251,7 @@ if($command == '/booking' || $command == 'Booking' || $command == 'booking')
                         
     }
 
-}
+
 
  
 
