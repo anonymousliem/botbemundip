@@ -100,8 +100,8 @@ function tts2($keyword) {
  
 
 
-function bott($keyword) {
-    $result = "test bot";
+function tolong($keyword) {
+    $result = "/help";
     return $result;
 }
 
@@ -401,10 +401,10 @@ if($message['type']=='text') {
         );
     }
 }
-
-/*    if ($command == 'bottt') {
+    if($message['type']=='text'){
+    if ($command == '/tolong' || $command == 'tolong') {
          
-        $result = bott($options);
+        $result = tolong($options);
         $balas = array(
             'replyToken' => $replyToken,
             'messages' => array(
@@ -415,7 +415,21 @@ if($message['type']=='text') {
             )
         );
     }
-*/
+}else if($message['type']=='text')
+    {   
+    $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                                        'text' => 'Maap keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
+
         if ($command == 'sigawe' || $command == '/Sigawe' || $command == 'Sigawe' || $command == '/sigawe'){
          
         $balas = array(
