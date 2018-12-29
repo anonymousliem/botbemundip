@@ -106,10 +106,10 @@ function tolong($keyword) {
 }
 
 function ashiap($keyword) {
-    $result = "keyword :\n";
-    $result .= "- /sop :\n";
-    $result .= "- /jadwal :\n";
-    $result .= "- /livereport :\n";
+    $result = "keyword\n";
+    $result .= "- /sop\n";
+    $result .= "- /jadwal\n";
+    $result .= "- /livereport";
     return $result;
 }
 
