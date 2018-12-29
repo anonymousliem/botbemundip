@@ -436,20 +436,6 @@ if($message['type']=='text') {
 
 
 
-else if($command==null)
-    {   
-                             $balas = array(
-                            'replyToken' => $replyToken,                                                        
-                            'messages' => array(
-                                array(
-                                        'type' => 'text',                                   
-                                        'text' => 'Sori nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
-                                    
-                                    )
-                            )
-                        );
-                        
-    }
 
 if (isset($balas)) {
     $result = json_encode($balas);
@@ -471,19 +457,19 @@ if (isset($balas)) {
     $client->replyMessage($balas_gagal);
 }
 
-/*else if($command)
+else if($command)
     {   
                              $balas = array(
                             'replyToken' => $replyToken,                                                        
                             'messages' => array(
                                 array(
                                         'type' => 'text',                                   
-                                        'text' => 'Sori nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
+                                        'text' => 'Sorie nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
                                     
                                     )
                             )
                         );
                         
     }
-*/
+
 ?>
