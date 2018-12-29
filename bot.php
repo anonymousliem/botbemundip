@@ -236,6 +236,23 @@ if ($command == '/keyword' || $command == 'keyword' || $command == 'Keyword') {
         );
     }
 
+if($command == '/booking' || $command == 'Booking' || $command == 'booking')
+    {   
+                             $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                                        'text' => 'http://bit.ly/jadwalbookingjarkoman'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
+
+}
+
  
 
 if($message['type']=='text') {
