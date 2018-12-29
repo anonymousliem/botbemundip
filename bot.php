@@ -266,8 +266,36 @@ if($command == '/sop' || $command == 'SOP' )
                         
     }
 
-
+if($command == '/livereport' || $command == 'livereport' )
+    {   
+                             $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                                        'text' => 'http://bit.ly/soplivereport'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
  
+if($command == '/help' || $command == '/about' )
+    {   
+                             $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                        'text' => 'Halo kak, saya adalah bot bem undip yang akan membantu kakak dalam berbagai hal.'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
+
 
 if($message['type']=='text') {
     if ($command == '/instagram') { 
