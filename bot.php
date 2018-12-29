@@ -402,19 +402,6 @@ if($message['type']=='text') {
     }
 }
     
-    if ($command == '/tolong' || $command == 'tolong') {
-         
-        $result = tolong($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result,
-                )
-            )
-        );
-    }
     
 
         if ($command == 'sigawe' || $command == '/Sigawe' || $command == 'Sigawe' || $command == '/sigawe'){
@@ -434,6 +421,35 @@ if($message['type']=='text') {
         }
 
 
+    if ($command == '/tolong' || $command == 'tolong') {
+         
+        $result = tolong($options);
+        $balas = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => $result,
+                )
+            )
+        );
+    }
+
+
+else if($command)
+    {   
+                             $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                                        'text' => 'Sorie nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
 
 
 
@@ -457,19 +473,5 @@ if (isset($balas)) {
     $client->replyMessage($balas_gagal);
 }
 
-else if($command)
-    {   
-                             $balas = array(
-                            'replyToken' => $replyToken,                                                        
-                            'messages' => array(
-                                array(
-                                        'type' => 'text',                                   
-                                        'text' => 'Sorie nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
-                                    
-                                    )
-                            )
-                        );
-                        
-    }
 
 ?>
