@@ -436,7 +436,7 @@ if($message['type']=='text') {
 
 
 
-else if($command)
+else if($command==null)
     {   
                              $balas = array(
                             'replyToken' => $replyToken,                                                        
@@ -470,4 +470,20 @@ if (isset($balas)) {
     ); }
     $client->replyMessage($balas_gagal);
 }
+
+/*else if($command)
+    {   
+                             $balas = array(
+                            'replyToken' => $replyToken,                                                        
+                            'messages' => array(
+                                array(
+                                        'type' => 'text',                                   
+                                        'text' => 'Sori nih keyword tidak ditemukan. silahkan ketik /keyword atau /help'                                       
+                                    
+                                    )
+                            )
+                        );
+                        
+    }
+*/
 ?>
