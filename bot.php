@@ -436,7 +436,7 @@ if($message['type']=='text') {
 
 
 
-else if($message['type']=='text')
+else if($command)
     {   
                              $balas = array(
                             'replyToken' => $replyToken,                                                        
