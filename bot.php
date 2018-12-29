@@ -420,6 +420,7 @@ if($message['type']=='text') {
             );
         }
 
+if($message['type']=='text') {
 
     if ($command == '/tolong' || $command == 'tolong') {
          
@@ -435,8 +436,7 @@ if($message['type']=='text') {
         );
     }
 
-
-else if($command==null)
+else if($command)
     {   
                              $balas = array(
                             'replyToken' => $replyToken,                                                        
@@ -451,6 +451,7 @@ else if($command==null)
                         
     }
 
+}
 
 
 if (isset($balas)) {
