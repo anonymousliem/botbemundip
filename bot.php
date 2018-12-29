@@ -420,6 +420,28 @@ if($message['type']=='text') {
             );
         }
 
+
+
+if (isset($balas)) {
+    $result = json_encode($balas);
+    file_put_contents('./balasan.json', $result);
+    if ($profileName) {
+        $client->replyMessage($balas);
+    } elseif($type == 'join') {
+        $client->replyMessage($balas);
+    } else {
+    $balas_gagal = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => 'Maaf, bot tidak dapat mendeteksi pesan dari kamu, silahkan ADD terlebih dahulu'
+            )
+        )
+    ); }
+    $client->replyMessage($balas_gagal);
+}
+
 if($message['type']=='text') {
 
     if ($command == '/tolong' || $command == 'tolong') {
@@ -453,26 +475,6 @@ else if($command)
 
 }
 
-
-if (isset($balas)) {
-    $result = json_encode($balas);
-    file_put_contents('./balasan.json', $result);
-    if ($profileName) {
-        $client->replyMessage($balas);
-    } elseif($type == 'join') {
-        $client->replyMessage($balas);
-    } else {
-    $balas_gagal = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
-                'type' => 'text',
-                'text' => 'Maaf, bot tidak dapat mendeteksi pesan dari kamu, silahkan ADD terlebih dahulu'
-            )
-        )
-    ); }
-    $client->replyMessage($balas_gagal);
-}
 
 
 ?>
