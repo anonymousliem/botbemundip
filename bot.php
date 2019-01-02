@@ -129,8 +129,8 @@ function atta($keyword) {
     $result .= "3. /bitly www.google.com\n";
     $result .= "4. /apakah saya kerang ajaib?\n";
     $result .= "5. /shalat semarang\n";
-    $result .= "6. /instagram anonymousliem\n";
-    $result .= "7. /cuaca medan\n";
+    $result .= "6. /instagram bemundip\n";
+    $result .= "7. /cuaca semarang\n";
     $result .= "8. /translate aku cinta kamu";
     return $result;
 }
