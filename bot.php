@@ -10,8 +10,8 @@ modified @ anonymousliem
 require_once('./line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
  
-$channelAccessToken = 'dPE0STKlAnvE8Uk5VYdQVRoFKb4pF4i81PsqkEN/ibfOo1Xuy+B2tz29vy0DAIeBBN4avJDr5MRCMVAEUfaJY47U2C2Ue5ilIcP5rlbDuaBX+4MMc3TW42GW7GI6/ndn7cDh8sgGWT9Ek630C+c5ywdB04t89/1O/w1cDnyilFU='; 
-$channelSecret = '3f2250053d085fc468da3e0e90536a00'; 
+$channelAccessToken = '#########'; 
+$channelSecret = '#####'; 
 
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
